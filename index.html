@@ -6,33 +6,60 @@
     <title>Perfil Vidros Pro</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; box-sizing: border-box; text-align: center; }
-        .header h1 { font-size: 24px; color: #1a73e8; margin: 0; text-transform: uppercase; }
-        .logo-diamond { font-size: 60px; color: #1a73e8; margin-bottom: 10px; }
-        label { display: block; font-weight: bold; margin-top: 15px; color: #444; text-align: left; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; box-sizing: border-box; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 480px; box-sizing: border-box; text-align: center; transition: all 0.3s ease; }
+        
+        /* Estilo do Logotipo (Diamante + Nome) */
+        .logo-container { margin-bottom: 25px; text-align: center; }
+        .logo-diamond { font-size: 60px; color: #1a73e8; margin-bottom: 10px; display: block; }
+        .logo-text { font-size: 24px; font-weight: bold; color: #333; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        .logo-text span { color: #1a73e8; font-style: italic; }
+
+        h2 { color: #1a73e8; margin-top: 0; margin-bottom: 20px; font-size: 20px; }
+        
+        /* Estilo dos Campos de Entrada */
+        label { display: block; font-weight: bold; margin-top: 15px; color: #444; font-size: 14px; text-align: left; }
         .input-group { position: relative; margin: 8px 0; }
-        .input-group .material-icons { position: absolute; left: 12px; top: 13px; color: #1a73e8; font-size: 20px; }
-        input, select { width: 100%; padding: 12px 12px 12px 42px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; background: #fafafa; }
+        .input-group .material-icons { position: absolute; left: 12px; top: 13px; color: #1a73e8; font-size: 20px; z-index: 2; }
+        input, select { width: 100%; padding: 14px 12px 14px 45px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; background: #fafafa; transition: border-color 0.2s; }
+        input:focus, select:focus { border-color: #1a73e8; outline: none; background: white; }
+        select { padding-left: 15px; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat: no-repeat; background-position: right 10px center; }
+
+        /* Contêiner de Senha com Olhinho */
         .pass-container { position: relative; width: 100%; }
-        .toggle-btn { position: absolute; right: 12px; top: 12px; cursor: pointer; font-size: 22px; z-index: 10; }
-        button { width: 100%; padding: 18px; background: #1a73e8; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 18px; }
+        .toggle-btn { position: absolute; right: 12px; top: 14px; cursor: pointer; font-size: 22px; z-index: 10; color: #666; padding: 0 5px; }
+
+        /* Botões */
+        button { width: 100%; padding: 18px; background: #1a73e8; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 18px; transition: background 0.2s; }
+        button:hover { background: #1557b0; }
+        
+        /* Estado Inicial: App Principal Escondido */
         #app-principal { display: none; }
-        #res { margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 12px; display: none; border-left: 5px solid #1a73e8; text-align: left; }
-        .btn-zap { background: #25d366; text-decoration: none; display: none; line-height: 55px; color: white; font-weight: bold; border-radius: 12px; margin-top: 15px; text-align: center; }
-        .row { display: flex; gap: 10px; }
+        
+        /* Resultado e Botão Zap */
+        #res { margin-top: 25px; padding: 20px; background: #e8f0fe; border-radius: 12px; display: none; border-left: 6px solid #1a73e8; text-align: left; font-size: 16px; color: #333; }
+        #res strong { color: #1a73e8; font-size: 18px; }
+        .btn-zap { background: #25d366; text-decoration: none; display: none; line-height: 55px; color: white; font-weight: bold; border-radius: 12px; margin-top: 15px; text-align: center; font-size: 18px; transition: background 0.2s; }
+        .btn-zap:hover { background: #1ebd5a; }
+        
+        /* Layout em Linha (Largura/Altura) */
+        .row { display: flex; gap: 15px; }
         .col { flex: 1; }
     </style>
 </head>
 <body>
 
     <div id="tela-login" class="card">
-        <div class="logo-diamond">💎</div>
-        <div class="header"><h1>Perfil Vidros <span>Pro</span></h1></div>
+        <div class="logo-container">
+            <span class="logo-diamond">💎</span>
+            <p class="logo-text">PERFIL VIDROS <span>PRO</span></p>
+        </div>
+        
         <div class="input-group">
             <span class="material-icons">person</span>
-            <input type="text" id="usuario" placeholder="Usuário">
+            <input type="text" id="usuario" placeholder="Usuário (opcional)">
         </div>
+        
         <div class="input-group">
             <span class="material-icons">lock</span>
             <div class="pass-container">
@@ -40,62 +67,132 @@
                 <span class="toggle-btn" onclick="verSenha()">👁️</span>
             </div>
         </div>
+        
         <button onclick="logar()">ENTRAR NO SISTEMA</button>
     </div>
 
     <div id="app-principal" class="card">
-        <div class="header"><h1>Orçamento Vidros</h1></div>
-        <label>Cliente:</label>
-        <div class="input-group"><span class="material-icons">person</span><input type="text" id="cli"></div>
-        <label>WhatsApp:</label>
-        <div class="input-group"><span class="material-icons">phone_iphone</span><input type="number" id="zap"></div>
-        <label>Tipo de Vidro:</label>
-        <select id="vid" style="padding-left:12px;">
-            <option value="132.80">Incolor 6mm (R$ 132,80)</option>
-            <option value="165.92">Incolor 8mm (R$ 165,92)</option>
-            <option value="166.98">Verde/Fumê 6mm (R$ 166,98)</option>
-            <option value="205.14">Verde/Fumê 8mm (R$ 205,14)</option>
-        </select>
-        <div class="row">
-            <div class="col"><label>Largura:</label><input type="number" id="lar" step="0.01"></div>
-            <div class="col"><label>Altura:</label><input type="number" id="alt" step="0.01" value="1.80"></div>
+        <div class="logo-container">
+            <span class="logo-diamond">💎</span>
+            <p class="logo-text">PERFIL VIDROS <span>PRO</span></p>
         </div>
-        <label>Mão de Obra:</label>
-        <div class="input-group"><span class="material-icons">payments</span><input type="number" id="mao" value="0"></div>
-        <button onclick="calc()">CALCULAR PREÇO</button>
+        
+        <h2>Novo Orçamento</h2>
+        
+        <label>Nome do Cliente:</label>
+        <div class="input-group">
+            <span class="material-icons">person</span>
+            <input type="text" id="cli" placeholder="Ex: João Silva">
+        </div>
+        
+        <label>WhatsApp (DDD + Número):</label>
+        <div class="input-group">
+            <span class="material-icons">phone_android</span>
+            <input type="number" id="zap" placeholder="Ex: 27999999999">
+        </div>
+        
+        <label>Tipo de Vidro:</label>
+        <select id="vid">
+            <option value="132.80">Incolor 6mm (R$ 132,80/m²)</option>
+            <option value="165.92">Incolor 8mm (R$ 165,92/m²)</option>
+            <option value="166.98">Verde/Fumê 6mm (R$ 166,98/m²)</option>
+            <option value="205.14">Verde/Fumê 8mm (R$ 205,14/m²)</option>
+        </select>
+
+        <label>Tipo de Kit (Alumínio):</label>
+        <select id="kt">
+            <option value="0">Nenhum</option>
+            <option value="135.00">F1 - 1,00m (R$ 135,00)</option>
+            <option value="149.00">F1 - 1,20m (R$ 149,00)</option>
+            <option value="158.00">F1 - 1,33m (R$ 158,00)</option>
+            <option value="169.00">F1 - 1,50m (R$ 169,00)</option>
+        </select>
+
+        <div class="row">
+            <div class="col">
+                <label>Largura (m):</label>
+                <input type="number" id="lar" step="0.01" placeholder="Ex: 1.50">
+            </div>
+            <div class="col">
+                <label>Altura (m):</label>
+                <input type="number" id="alt" step="0.01" value="1.80">
+            </div>
+        </div>
+
+        <label>Mão de Obra / Lucro (R$):</label>
+        <div class="input-group">
+            <span class="material-icons">payments</span>
+            <input type="number" id="mao" value="0">
+        </div>
+
+        <button onclick="calc()">CALCULAR PREÇO FINAL</button>
+        
         <div id="res"></div>
-        <a id="linkZap" class="btn-zap" target="_blank">ENVIAR WHATSAPP</a>
+        <a id="linkZap" class="btn-zap" target="_blank">ENVIAR VIA WHATSAPP</a>
+        
+        <button onclick="location.reload()" style="background:#888; font-size:14px; margin-top:30px; padding: 12px;">SAIR DO SISTEMA</button>
     </div>
 
     <script>
+        // Função do Olhinho
         function verSenha() {
-            var x = document.getElementById("senha");
-            var b = document.querySelector(".toggle-btn");
-            if (x.type === "password") { x.type = "text"; b.innerHTML = "🙈"; } 
-            else { x.type = "password"; b.innerHTML = "👁️"; }
+            var campo = document.getElementById("senha");
+            var icone = document.querySelector(".toggle-btn");
+            if (campo.type === "password") {
+                campo.type = "text";
+                icone.innerHTML = "🙈";
+            } else {
+                campo.type = "password";
+                icone.innerHTML = "👁️";
+            }
         }
 
+        // Função de Login
         function logar() {
             var s = document.getElementById("senha").value.toLowerCase();
+            // SENHA DEFINIDA: pimentel0318
             if (s === "pimentel0318") {
                 document.getElementById("tela-login").style.display = "none";
                 document.getElementById("app-principal").style.display = "block";
-            } else { alert("Senha incorreta!"); }
+                window.scrollTo(0, 0); // Sobe a tela para o topo
+            } else {
+                alert("Senha incorreta! Tente novamente.");
+            }
         }
 
+        // Função de Cálculo
         function calc() {
             const l = parseFloat(document.getElementById("lar").value);
             const a = parseFloat(document.getElementById("alt").value);
             const v = parseFloat(document.getElementById("vid").value);
+            const k = parseFloat(document.getElementById("kt").value);
             const m = parseFloat(document.getElementById("mao").value) || 0;
+            
             if (l > 0 && a > 0) {
                 const area = l * a;
-                const total = (area * v) + m;
-                document.getElementById("res").style.display = "block";
-                document.getElementById("res").innerHTML = "Área: " + area.toFixed(2) + " m²<br><strong>Total: R$ " + total.toFixed(2) + "</strong>";
-                document.getElementById("linkZap").style.display = "block";
-                const msg = "*Orçamento Perfil Vidros*\nTotal: R$ " + total.toFixed(2);
-                document.getElementById("linkZap").href = "https://wa.me/" + document.getElementById("zap").value + "?text=" + encodeURIComponent(msg);
+                // CÁLCULO: AREA x VIDRO + KIT + MÃO DE OBRA
+                const total = (area * v) + k + m;
+                
+                // Mostrar Resultado
+                const resDiv = document.getElementById("res");
+                resDiv.style.display = "block";
+                resDiv.innerHTML = `<strong>Resumo do Orçamento:</strong><br>
+                                    Medidas: ${l.toFixed(2)}m x ${a.toFixed(2)}m<br>
+                                    Área Total: ${area.toFixed(2)} m²<br>
+                                    -----------------------------<br>
+                                    <strong>VALOR TOTAL: R$ ${total.toFixed(2)}</strong>`;
+                
+                // Preparar Botão WhatsApp
+                const zapBtn = document.getElementById("linkZap");
+                zapBtn.style.display = "block";
+                const cliente = document.getElementById("cli").value || "Cliente";
+                const msg = `*Orçamento Perfil Vidros Pro*\nCliente: ${cliente}\nMedidas: ${l.toFixed(2)}m x ${a.toFixed(2)}m\nTotal: R$ ${total.toFixed(2)}`;
+                zapBtn.href = "https://wa.me/" + document.getElementById("zap").value + "?text=" + encodeURIComponent(msg);
+                
+                // Rola a tela para baixo para ver o resultado
+                window.scrollTo(0, document.body.scrollHeight);
+            } else {
+                alert("Por favor, preencha a Largura e a Altura corretamente.");
             }
         }
     </script>

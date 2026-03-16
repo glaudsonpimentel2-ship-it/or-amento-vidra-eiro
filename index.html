@@ -2,92 +2,103 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>App Vidraceiro Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Perfil Vidros</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; padding: 20px; background-color: #f0f2f5; }
-        .card { max-width: 450px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2 { color: #1a73e8; text-align: center; margin-bottom: 20px; }
-        label { font-weight: bold; display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn-calc { width: 100%; padding: 15px; background: #1a73e8; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; margin-top: 20px; cursor: pointer; }
-        .btn-whatsapp { width: 100%; padding: 15px; background: #25D366; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; margin-top: 10px; cursor: pointer; display: none; text-align: center; text-decoration: none; }
-        #resultado { margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 8px; line-height: 1.6; display: none; }
-        .total { font-size: 1.3em; color: #d93025; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { color: #1a73e8; text-align: center; margin-top: 0; font-size: 24px; }
+        label { font-weight: bold; display: block; margin: 15px 0 5px; color: #444; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; background: #fafafa; }
+        .btn-calc { width: 100%; padding: 15px; background-color: #1a73e8; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 25px; cursor: pointer; transition: 0.3s; }
+        .btn-calc:active { transform: scale(0.98); background-color: #1557b0; }
+        #resultado { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f0fe; display: none; line-height: 1.6; }
+        .btn-whatsapp { width: 100%; padding: 15px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 15px; text-decoration: none; display: none; text-align: center; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Orçamento perfil vidros</h2>
+        <h2>Orçamento Perfil Vidros</h2>
+        
         <label>Nome do Cliente:</label>
-        <input type="text" id="cliente" placeholder="Ex: Sr. perfil vidros">
-        <label>WhatsApp do Cliente (DDD + Número):</label>
-        <input type="number" id="telemovel" placeholder="Ex: 5527999999999">
+        <input type="text" id="cliente" placeholder="Ex: João Silva">
+
+        <label>WhatsApp do Cliente:</label>
+        <input type="number" id="tel" placeholder="DDD + Número (só números)">
+
         <label>Tipo de Vidro:</label>
         <select id="vidro">
             <option value="132.80">Incolor 6mm (R$ 132,80)</option>
             <option value="165.92">Incolor 8mm (R$ 165,92)</option>
-            <option value="166.98">Verde/Fumê 6mm (R$ 166,98)</option>
+            <option value="166.90">Verde/Fumê 6mm (R$ 166,90)</option>
             <option value="205.14">Verde/Fumê 8mm (R$ 205,14)</option>
         </select>
-        <label>Tipo de Kit (Fosco/Branco/Preto):</label>
+
+        <label>Tipo de Kit:</label>
         <select id="kit">
-            <option value="0">Nenhuma</option>
+            <option value="0">Nenhum</option>
             <option value="135.00">F1-1,00 (R$ 135,00)</option>
-            <option value="149.00">F1-1,20 (R$ 149,00)</option>
-            <option value="158.00">F1-1,33 (R$ 158,00)</option>
+            <option value="145.00">F1-1,10 (R$ 145,00)</option>
+            <option value="150.00">F1-1,20 (R$ 150,00)</option>
+            <option value="155.00">F1-1,30 (R$ 155,00)</option>
+            <option value="160.00">F1-1,40 (R$ 160,00)</option>
             <option value="169.00">F1-1,50 (R$ 169,00)</option>
-            
         </select>
+
         <label>Largura (m):</label>
-<input type="number" id="largura" step="0.01" placeholder="Ex: 1.33">
+        <input type="number" id="largura" step="0.01" placeholder="Ex: 1.33">
 
-<label>Altura (m):</label>
-<input type="number" id="altura" value="1.80" step="0.01">
+        <label>Altura (m):</label>
+        <input type="number" id="altura" step="0.01" placeholder="Ex: 1.80">
 
-<label style="display: block; margin: 10px 0; font-weight: bold; color: #000;">Valor da Mão de Obra (R$):</label>
-<input type="number" id="maoObraManual" step="0.01" placeholder="Ex: 300.00" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <label>Mão de Obra Adicional (R$):</label>
+        <input type="number" id="maoDeObra" value="0">
 
-<div id="resultado" style="display: none; margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 5px; color: #000;"></div>
-<button class="btn-calc" onclick="gerar()">CALCULAR PREÇO</button>
-<a id="btnWhats" class="btn-whatsapp" target="_blank" style="display: none;">ENVIAR PARA WHATSAPP</a>
+        <button class="btn-calc" onclick="gerar()">CALCULAR PREÇO</button>
+
+        <div id="resultado"></div>
+        <a id="btnZap" class="btn-whatsapp" target="_blank">ENVIAR PARA WHATSAPP</a>
     </div>
+
     <script>
-function gerar() {
-    const cliente = document.getElementById('cliente').value;
-    const telemovel = document.getElementById('telemovel').value.replace(/\D/g, '');
-    const precoVidro = parseFloat(document.getElementById('vidro').value);
-    const precoKit = parseFloat(document.getElementById('kit').value);
-    const largura = parseFloat(document.getElementById('largura').value);
-    const altura = parseFloat(document.getElementById('altura').value);
-    const maoObraManual = parseFloat(document.getElementById('maoObraManual').value) || 0;
+        function gerar() {
+            const cliente = document.getElementById('cliente').value;
+            const tel = document.getElementById('tel').value;
+            const precoVidro = parseFloat(document.getElementById('vidro').value);
+            const precoKit = parseFloat(document.getElementById('kit').value);
+            const largura = parseFloat(document.getElementById('largura').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const maoDeObra = parseFloat(document.getElementById('maoDeObra').value) || 0;
 
-    if (largura > 0 && altura > 0) {
-        const area = largura * altura;
-        const totalCusto = (area * precoVidro) + precoKit;
-        const valorVenda = (totalCusto * 1.4) + maoObraManual;
+            if (largura > 0 && altura > 0) {
+                const area = largura * altura;
+                const custoMaterial = (area * precoVidro) + precoKit;
+                // Regra do Pimentel: 100% sobre material + Mão de obra extra
+                const valorFinal = (custoMaterial * 2) + maoDeObra;
 
-        const res = document.getElementById('resultado');
-        res.style.display = 'block';
-        res.innerHTML = `<strong>Área:</strong> ${area.toFixed(2)} m² <br> <strong>Valor Total: R$ ${valorVenda.toFixed(2)}</strong>`;
+                const resDiv = document.getElementById('resultado');
+                resDiv.style.display = 'block';
+                resDiv.innerHTML = `<strong>Resumo do Orçamento:</strong><br>
+                                    Área: ${area.toFixed(2)} m²<br>
+                                    <strong>Valor Total: R$ ${valorFinal.toFixed(2)}</strong>`;
 
-        // Pega os nomes para o WhatsApp
-      const vidroNome = document.getElementById('vidro').options[document.getElementById('vidro').selectedIndex].text.split('(')[0].trim();
-const kitNome = document.getElementById('kit').options[document.getElementById('kit').selectedIndex].text.split('(')[0].trim();
+                const btnZap = document.getElementById('btnZap');
+                btnZap.style.display = 'block';
+                
+                const vidroNome = document.getElementById('vidro').options[document.getElementById('vidro').selectedIndex].text.split(' (')[0];
+                const kitNome = document.getElementById('kit').options[document.getElementById('kit').selectedIndex].text.split(' (')[0];
+                
+                const msg = `Olá ${cliente}, segue seu orçamento:\n\n` +
+                            `📌 *Produto:* ${vidroNome}\n` +
+                            `📏 *Medidas:* ${largura}m x ${altura}m\n` +
+                            `🛠️ *Kit:* ${kitNome}\n\n` +
+                            `💰 *VALOR TOTAL: R$ ${valorFinal.toFixed(2)}*`;
 
-        const btnW = document.getElementById('btnWhats');
-        btnW.style.display = 'block';
-
-        const textoZap = `Olá ${cliente}, segue o seu orçamento:\n\n` +
-                         `*Vidro:* ${vidroNome}\n` + 
-                         `*Medidas:* ${largura}m x ${altura}m\n` +
-                         `*VALOR TOTAL:* R$ ${valorVenda.toFixed(2)}`;
-
-        btnW.href = `https://wa.me/55${telemovel}?text=${encodeURIComponent(textoZap)}`;
-
-    } else {
-        alert("Por favor, preencha a largura e a altura corretamente!");
-    }
-    }
-     </script>
+                btnZap.href = `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`;
+            } else {
+                alert("Por favor, preencha as medidas corretamente!");
+            }
+        }
+    </script>
 </body>
 </html>

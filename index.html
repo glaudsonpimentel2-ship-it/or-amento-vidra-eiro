@@ -3,138 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Vidraceiro Pro</title>
+    <title>Perfil Vidros Pro</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 480px; box-sizing: border-box; }
-        h2 { color: #1a73e8; margin-bottom: 20px; text-align: center; }
-        label { font-weight: bold; display: block; margin: 12px 0 5px; color: #444; }
-        input, select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; margin-bottom: 5px; background: #fafafa; }
-        .pass-container { position: relative; width: 100%; }
-        .toggle-btn { position: absolute; right: 12px; top: 12px; cursor: pointer; font-size: 22px; z-index: 10; }
-        button { width: 100%; padding: 16px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; background: #1a73e8; color: white; margin-top: 15px; }
-        .btn-green { background: #25d366; color: white; margin-top: 15px; display: none; text-decoration: none; text-align: center; line-height: 50px; border-radius: 8px; font-weight: bold; }
-        #app-principal { display: none; }
-        #resultado { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f0fe; display: none; border-left: 5px solid #1a73e8; }
-        .row { display: flex; gap: 10px; }
-        .col { flex: 1; }
-        .msg-opcional { font-size: 12px; color: #666; font-style: italic; margin-bottom: 10px; }
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 480px; text-align: center; box-sizing: border-box; }
+        input, select { width: 100%; padding: 14px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 16px; background: #1a73e8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 18px; }
+        #app { display: none; }
+        #res { margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 8px; text-align: left; display: none; border-left: 5px solid #1a73e8; }
+        .btn-zap { background: #25d366; text-decoration: none; display: none; line-height: 50px; color: white; font-weight: bold; border-radius: 8px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="tela-login" class="card">
-        <div style="font-size: 50px; text-align: center;">💎</div>
+    <div id="login" class="card">
+        <div style="font-size: 50px;">💎</div>
         <h2>Perfil Vidros Pro</h2>
-        <input type="text" id="user" placeholder="Usuário">
-        <div class="pass-container">
-            <input type="password" id="pass" placeholder="Senha">
-            <span class="toggle-btn" onclick="ver()">👁️</span>
-        </div>
-        <button onclick="logar()">ENTRAR</button>
+        <input type="password" id="p" placeholder="Digite a Senha">
+        <button onclick="entrar()">ENTRAR</button>
     </div>
 
-    <div id="app-principal" class="card">
-        <h2>Orçamento Vidros</h2>
-        
-        <label>Nome do Cliente:</label>
-        <input type="text" id="cliente" placeholder="Ex: Sr. perfil vidros">
-
-        <label>WhatsApp:</label>
-        <input type="number" id="tel" placeholder="Ex: 5527999999999">
-
-        <label>Tipo de Vidro:</label>
-        <select id="vidro">
+    <div id="app" class="card">
+        <h2 style="color:#1a73e8">Orçamento Vidros</h2>
+        <input type="text" id="cli" placeholder="Nome do Cliente">
+        <input type="number" id="zap" placeholder="WhatsApp (DDD+Número)">
+        <select id="vid">
             <option value="132.80">Incolor 6mm (R$ 132,80)</option>
             <option value="165.92">Incolor 8mm (R$ 165,92)</option>
             <option value="166.98">Verde/Fumê 6mm (R$ 166,98)</option>
             <option value="205.14">Verde/Fumê 8mm (R$ 205,14)</option>
         </select>
-
-        <label>Tipo de Kit:</label>
-        <select id="kit">
-            <option value="0">Nenhuma</option>
-            <option value="135.00">F1-1,00 (R$ 135,00)</option>
-            <option value="149.00">F1-1,20 (R$ 149,00)</option>
-            <option value="158.00">F1-1,33 (R$ 158,00)</option>
-            <option value="169.00">F1-1,50 (R$ 169,00)</option>
-        </select>
-
-        <div class="row">
-            <div class="col">
-                <label>Largura (m):</label>
-                <input type="number" id="l" step="0.01" placeholder="1,32">
-            </div>
-            <div class="col">
-                <label>Altura (m):</label>
-                <input type="number" id="a" step="0.01" value="1.80">
-            </div>
+        <div style="display: flex; gap: 10px;">
+            <input type="number" id="lar" placeholder="Largura (m)" step="0.01">
+            <input type="number" id="alt" placeholder="Altura (m)" step="0.01" value="1.80">
         </div>
-
-        <label>Mão de Obra (Opcional):</label>
-        <p class="msg-opcional">Deixe 0 se não quiser cobrar extra agora.</p>
-        <input type="number" id="maoDeObra" value="0">
-
-        <button onclick="calcular()">CALCULAR ORÇAMENTO</button>
-
-        <div id="resultado"></div>
-        <a id="btnZap" class="btn-green" target="_blank">ENVIAR PARA WHATSAPP</a>
-        
-        <button onclick="location.reload()" style="background:#888; margin-top: 30px; font-size: 14px; padding: 10px;">SAIR</button>
+        <input type="number" id="mao" placeholder="Mão de Obra (R$)" value="0">
+        <button onclick="calc()">CALCULAR PREÇO</button>
+        <div id="res"></div>
+        <a id="linkZap" class="btn-zap" target="_blank">ENVIAR WHATSAPP</a>
     </div>
 
     <script>
-        function ver() {
-            var p = document.getElementById("pass");
-            var b = document.querySelector(".toggle-btn");
-            if (p.type === "password") { p.type = "text"; b.innerHTML = "🙈"; }
-            else { p.type = "password"; b.innerHTML = "👁️"; }
-        }
-
-        function logar() {
-            var s = document.getElementById("pass").value.toLowerCase();
-            if (s === "pimentel0318") {
-                document.getElementById("tela-login").style.display = "none";
-                document.getElementById("app-principal").style.display = "block";
+        function entrar() {
+            if(document.getElementById("p").value.toLowerCase() === "pimentel0318") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("app").style.display = "block";
             } else { alert("Senha incorreta!"); }
         }
-
-        function calcular() {
-            const precoVidro = parseFloat(document.getElementById('vidro').value);
-            const precoKit = parseFloat(document.getElementById('kit').value);
-            const l = parseFloat(document.getElementById('l').value);
-            const a = parseFloat(document.getElementById('a').value);
-            const maoDeObra = parseFloat(document.getElementById('maoDeObra').value) || 0;
-            const cliente = document.getElementById('cliente').value || "Cliente";
-            const tel = document.getElementById('tel').value;
-
+        function calc() {
+            const l = parseFloat(document.getElementById("lar").value);
+            const a = parseFloat(document.getElementById("alt").value);
+            const v = parseFloat(document.getElementById("vid").value);
+            const m = parseFloat(document.getElementById("mao").value) || 0;
+            
             if (l > 0 && a > 0) {
                 const area = l * a;
-                // Soma direta conforme solicitado (sem dobra automática)
-                const valorFinal = (area * precoVidro) + precoKit + maoDeObra;
-
-                const res = document.getElementById('resultado');
-                res.style.display = 'block';
-                // Resumo limpo conforme solicitado: apenas Área e Total
-                res.innerHTML = `<strong>Resumo:</strong><br>
-                                 Área Total: ${area.toFixed(2)}m²<br><br>
-                                 <strong>VALOR TOTAL: R$ ${valorFinal.toFixed(2)}</strong>`;
+                const total = (area * v) + m;
+                document.getElementById("res").style.display = "block";
+                document.getElementById("res").innerHTML = "Área: " + area.toFixed(2) + " m²<br><strong>Valor Total: R$ " + total.toFixed(2) + "</strong>";
                 
-                const zap = document.getElementById('btnZap');
-                zap.style.display = 'block';
-                
-                const vidroNome = document.getElementById('vidro').options[document.getElementById('vidro').selectedIndex].text.split(' (')[0];
-                const kitNome = document.getElementById('kit').options[document.getElementById('kit').selectedIndex].text.split(' (')[0];
-
-                const msg = `*Orçamento Perfil Vidros*\n\n` +
-                            `Cliente: ${cliente}\n` +
-                            `Vidro: ${vidroNome}\n` +
-                            `Kit: ${kitNome}\n` +
-                            `Medidas: ${l}m x ${a}m\n\n` +
-                            `*VALOR TOTAL: R$ ${valorFinal.toFixed(2)}*`;
-                
-                zap.href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
-            } else { alert("Por favor, preencha as medidas de largura e altura!"); }
+                document.getElementById("linkZap").style.display = "block";
+                const msg = "Orçamento Perfil Vidros\nCliente: " + document.getElementById("cli").value + "\nTotal: R$ " + total.toFixed(2);
+                document.getElementById("linkZap").href = "https://wa.me/" + document.getElementById("zap").value + "?text=" + encodeURIComponent(msg);
+            }
         }
     </script>
 </body>

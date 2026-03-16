@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orçamento Perfil Vidros</title>
+    <title>Perfil Vidros Pro - Login</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
-        h2 { color: #1a73e8; text-align: center; margin-top: 0; font-size: 24px; }
-        label { font-weight: bold; display: block; margin: 15px 0 5px; color: #444; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; background: #fafafa; }
-        .btn-calc { width: 100%; padding: 15px; background-color: #1a73e8; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 25px; cursor: pointer; transition: 0.3s; }
-        .btn-calc:active { transform: scale(0.98); background-color: #1557b0; }
-        #resultado { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f0fe; display: none; line-height: 1.6; }
-        .btn-whatsapp { width: 100%; padding: 15px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 15px; text-decoration: none; display: none; text-align: center; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        
+        /* Telas */
+        #tela-login { text-align: center; }
+        #app-principal { display: none; }
+
+        h2 { color: #1a73e8; margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin: 15px 0 5px; color: #444; text-align: left; }
+        input, select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; margin-bottom: 10px; background: #fafafa; }
+        
+        button { width: 100%; padding: 16px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-blue { background-color: #1a73e8; color: white; }
+        .btn-blue:active { background-color: #1557b0; transform: scale(0.98); }
+        .btn-green { background-color: #25d366; color: white; margin-top: 15px; display: none; text-decoration: none; text-align: center; line-height: 50px; }
+        
+        #resultado { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f0fe; display: none; border-left: 5px solid #1a73e8; }
+        .logo { font-size: 60px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Orçamento Perfil Vidros</h2>
+
+    <div id="tela-login" class="card">
+        <div class="logo">💎</div>
+        <h2>Perfil Vidros Pro</h2>
+        <p style="color: #666;">Área Restrita para Parceiros</p>
+        <input type="text" id="user" placeholder="Seu usuário">
+        <input type="password" id="pass" placeholder="Sua senha">
+        <button class="btn-blue" onclick="verificarLogin()">ENTRAR</button>
+        <p style="font-size: 13px; color: #999; margin-top: 25px;">Esqueceu a senha? Fale com o Pimentel.</p>
+    </div>
+
+    <div id="app-principal" class="card" style="max-width: 500px;">
+        <h2 style="font-size: 22px;">Orçamento Perfil Vidros</h2>
         
-        <label>Nome do Cliente:</label>
-        <input type="text" id="cliente" placeholder="Ex: João Silva">
+        <label>Cliente:</label>
+        <input type="text" id="cliente" placeholder="Nome do cliente">
 
-        <label>WhatsApp do Cliente:</label>
-        <input type="number" id="tel" placeholder="DDD + Número (só números)">
+        <label>WhatsApp:</label>
+        <input type="number" id="tel" placeholder="DDD + Número">
 
-        <label>Tipo de Vidro:</label>
+        <label>Vidro:</label>
         <select id="vidro">
             <option value="132.80">Incolor 6mm (R$ 132,80)</option>
             <option value="165.92">Incolor 8mm (R$ 165,92)</option>
@@ -34,69 +54,55 @@
             <option value="205.14">Verde/Fumê 8mm (R$ 205,14)</option>
         </select>
 
-        <label>Tipo de Kit:</label>
-        <select id="kit">
-            <option value="0">Nenhum</option>
-            <option value="135.00">F1-1,00 (R$ 135,00)</option>
-            <option value="145.00">F1-1,10 (R$ 145,00)</option>
-            <option value="150.00">F1-1,20 (R$ 150,00)</option>
-            <option value="155.00">F1-1,30 (R$ 155,00)</option>
-            <option value="160.00">F1-1,40 (R$ 160,00)</option>
-            <option value="169.00">F1-1,50 (R$ 169,00)</option>
-        </select>
+        <label>Medidas (m):</label>
+        <div style="display: flex; gap: 10px;">
+            <input type="number" id="largura" step="0.01" placeholder="Largura">
+            <input type="number" id="altura" step="0.01" placeholder="Altura">
+        </div>
 
-        <label>Largura (m):</label>
-        <input type="number" id="largura" step="0.01" placeholder="Ex: 1.33">
-
-        <label>Altura (m):</label>
-        <input type="number" id="altura" step="0.01" placeholder="Ex: 1.80">
-
-        <label>Mão de Obra Adicional (R$):</label>
-        <input type="number" id="maoDeObra" value="0">
-
-        <button class="btn-calc" onclick="gerar()">CALCULAR PREÇO</button>
+        <button class="btn-blue" onclick="calcular()">CALCULAR AGORA</button>
 
         <div id="resultado"></div>
-        <a id="btnZap" class="btn-whatsapp" target="_blank">ENVIAR PARA WHATSAPP</a>
+        <a id="btnZap" class="btn-green" target="_blank">ENVIAR PARA WHATSAPP</a>
     </div>
 
     <script>
-        function gerar() {
-            const cliente = document.getElementById('cliente').value;
-            const tel = document.getElementById('tel').value;
-            const precoVidro = parseFloat(document.getElementById('vidro').value);
-            const precoKit = parseFloat(document.getElementById('kit').value);
-            const largura = parseFloat(document.getElementById('largura').value);
-            const altura = parseFloat(document.getElementById('altura').value);
-            const maoDeObra = parseFloat(document.getElementById('maoDeObra').value) || 0;
+        function verificarLogin() {
+            const u = document.getElementById('user').value.toLowerCase();
+            const s = document.getElementById('pass').value;
 
-            if (largura > 0 && altura > 0) {
-                const area = largura * altura;
-                const custoMaterial = (area * precoVidro) + precoKit;
-                // Regra do Pimentel: 100% sobre material + Mão de obra extra
-                const valorFinal = (custoMaterial * 2) + maoDeObra;
-
-                const resDiv = document.getElementById('resultado');
-                resDiv.style.display = 'block';
-                resDiv.innerHTML = `<strong>Resumo do Orçamento:</strong><br>
-                                    Área: ${area.toFixed(2)} m²<br>
-                                    <strong>Valor Total: R$ ${valorFinal.toFixed(2)}</strong>`;
-
-                const btnZap = document.getElementById('btnZap');
-                btnZap.style.display = 'block';
-                
-                const vidroNome = document.getElementById('vidro').options[document.getElementById('vidro').selectedIndex].text.split(' (')[0];
-                const kitNome = document.getElementById('kit').options[document.getElementById('kit').selectedIndex].text.split(' (')[0];
-                
-                const msg = `Olá ${cliente}, segue seu orçamento:\n\n` +
-                            `📌 *Produto:* ${vidroNome}\n` +
-                            `📏 *Medidas:* ${largura}m x ${altura}m\n` +
-                            `🛠️ *Kit:* ${kitNome}\n\n` +
-                            `💰 *VALOR TOTAL: R$ ${valorFinal.toFixed(2)}*`;
-
-                btnZap.href = `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`;
+            // NOVA SENHA PADRÃO DEFINIDA
+            if(u === "pimentel" && s === "Pimentel0318") {
+                document.getElementById('tela-login').style.display = 'none';
+                document.getElementById('app-principal').style.display = 'block';
             } else {
-                alert("Por favor, preencha as medidas corretamente!");
+                alert("Acesso negado! Verifique o usuário e a senha.");
+            }
+        }
+
+        function calcular() {
+            const precoVidro = parseFloat(document.getElementById('vidro').value);
+            const l = parseFloat(document.getElementById('largura').value);
+            const a = parseFloat(document.getElementById('altura').value);
+            const cliente = document.getElementById('cliente').value || "Cliente";
+            const tel = document.getElementById('tel').value;
+
+            if (l > 0 && a > 0) {
+                const total = (l * a * precoVidro) * 2;
+                
+                const res = document.getElementById('resultado');
+                res.style.display = 'block';
+                res.innerHTML = `<strong>Resumo do Pedido:</strong><br>Medidas: ${l}m x ${a}m<br><strong>Total: R$ ${total.toFixed(2)}</strong>`;
+
+                const zap = document.getElementById('btnZap');
+                zap.style.display = 'block';
+                const msg = `Olá ${cliente}, segue orçamento da Perfil Vidros:\n\n` +
+                            `📏 Medidas: ${l}m x ${a}m\n` +
+                            `💰 Valor Total: R$ ${total.toFixed(2)}`;
+                
+                zap.href = `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`;
+            } else {
+                alert("Por favor, preencha as medidas!");
             }
         }
     </script>

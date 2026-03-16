@@ -8,10 +8,13 @@
         body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
         .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 480px; text-align: center; box-sizing: border-box; }
         input, select { width: 100%; padding: 14px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .pass-container { position: relative; width: 100%; }
+        .toggle-btn { position: absolute; right: 12px; top: 12px; cursor: pointer; font-size: 22px; z-index: 10; padding: 5px; }
         button { width: 100%; padding: 16px; background: #1a73e8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 18px; }
         #app { display: none; }
         #res { margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 8px; text-align: left; display: none; border-left: 5px solid #1a73e8; }
-        .btn-zap { background: #25d366; text-decoration: none; display: none; line-height: 50px; color: white; font-weight: bold; border-radius: 8px; margin-top: 10px; }
+        .btn-zap { background: #25d366; text-decoration: none; display: none; line-height: 50px; color: white; font-weight: bold; border-radius: 8px; margin-top: 10px; text-align: center; }
+        label { display: block; text-align: left; font-weight: bold; margin-top: 10px; color: #444; }
     </style>
 </head>
 <body>
@@ -19,7 +22,11 @@
     <div id="login" class="card">
         <div style="font-size: 50px;">💎</div>
         <h2>Perfil Vidros Pro</h2>
-        <input type="password" id="p" placeholder="Digite a Senha">
+        <input type="text" id="u" placeholder="Usuário">
+        <div class="pass-container">
+            <input type="password" id="p" placeholder="Senha">
+            <span class="toggle-btn" onclick="ver()">👁️</span>
+        </div>
         <button onclick="entrar()">ENTRAR</button>
     </div>
 
@@ -27,38 +34,63 @@
         <h2 style="color:#1a73e8">Orçamento Vidros</h2>
         <input type="text" id="cli" placeholder="Nome do Cliente">
         <input type="number" id="zap" placeholder="WhatsApp (DDD+Número)">
+        
+        <label>Tipo de Vidro:</label>
         <select id="vid">
             <option value="132.80">Incolor 6mm (R$ 132,80)</option>
             <option value="165.92">Incolor 8mm (R$ 165,92)</option>
             <option value="166.98">Verde/Fumê 6mm (R$ 166,98)</option>
             <option value="205.14">Verde/Fumê 8mm (R$ 205,14)</option>
         </select>
+
+        <label>Tipo de Kit:</label>
+        <select id="kt">
+            <option value="0">Nenhum</option>
+            <option value="135.00">F1-1,00 (R$ 135,00)</option>
+            <option value="149.00">F1-1,20 (R$ 149,00)</option>
+            <option value="158.00">F1-1,33 (R$ 158,00)</option>
+            <option value="169.00">F1-1,50 (R$ 169,00)</option>
+        </select>
+
         <div style="display: flex; gap: 10px;">
-            <input type="number" id="lar" placeholder="Largura (m)" step="0.01">
-            <input type="number" id="alt" placeholder="Altura (m)" step="0.01" value="1.80">
+            <div style="flex:1;"><label>Largura:</label><input type="number" id="lar" step="0.01"></div>
+            <div style="flex:1;"><label>Altura:</label><input type="number" id="alt" step="0.01" value="1.80"></div>
         </div>
-        <input type="number" id="mao" placeholder="Mão de Obra (R$)" value="0">
+
+        <label>Mão de Obra (R$):</label>
+        <input type="number" id="mao" value="0">
+
         <button onclick="calc()">CALCULAR PREÇO</button>
         <div id="res"></div>
         <a id="linkZap" class="btn-zap" target="_blank">ENVIAR WHATSAPP</a>
     </div>
 
     <script>
+        function ver() {
+            var x = document.getElementById("p");
+            var b = document.querySelector(".toggle-btn");
+            if (x.type === "password") { x.type = "text"; b.innerHTML = "🙈"; }
+            else { x.type = "password"; b.innerHTML = "👁️"; }
+        }
+
         function entrar() {
-            if(document.getElementById("p").value.toLowerCase() === "pimentel0318") {
+            var pass = document.getElementById("p").value.toLowerCase();
+            if(pass === "pimentel0318") {
                 document.getElementById("login").style.display = "none";
                 document.getElementById("app").style.display = "block";
             } else { alert("Senha incorreta!"); }
         }
+
         function calc() {
             const l = parseFloat(document.getElementById("lar").value);
             const a = parseFloat(document.getElementById("alt").value);
             const v = parseFloat(document.getElementById("vid").value);
+            const k = parseFloat(document.getElementById("kt").value);
             const m = parseFloat(document.getElementById("mao").value) || 0;
             
             if (l > 0 && a > 0) {
                 const area = l * a;
-                const total = (area * v) + m;
+                const total = (area * v) + k + m;
                 document.getElementById("res").style.display = "block";
                 document.getElementById("res").innerHTML = "Área: " + area.toFixed(2) + " m²<br><strong>Valor Total: R$ " + total.toFixed(2) + "</strong>";
                 
